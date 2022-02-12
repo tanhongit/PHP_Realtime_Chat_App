@@ -11,4 +11,9 @@ class UserController extends Controller
     {
         $this->renderView('frontend.user.signup');
     }
+
+    public function list()
+    {
+        $this->renderView('frontend.user.list', array('test' => 1));
+    }
 }
