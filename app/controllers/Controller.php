@@ -20,6 +20,8 @@ class Controller
      */
     protected function renderView($viewPath, array $data = [])
     {
+        require 'app/views/frontend/partial/header.php';
+
         //get data
         foreach ($data as $key => $value) {
             $$key = $value;
@@ -27,6 +29,8 @@ class Controller
 
         $viewPathFile = self::VIEW_PATH . '/' . str_replace('.', '/', $viewPath) . '.php';
         require $viewPathFile;
+
+        require 'app/views/frontend/partial/footer.php';
     }
 
     /**
