@@ -1,6 +1,6 @@
 <?php
 
-class BaseModel extends Database
+class BaseModel extends Model
 {
     protected $connectResult;
 

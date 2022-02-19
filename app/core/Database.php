@@ -100,12 +100,7 @@ class Database
         }
         $query = $this->_query($sql) or die(mysqli_error($this->connectResult));
         $id = ($id > 0) ? $id : mysqli_insert_id($this->connectResult);
-        //return $id;
-        if (mysqli_num_rows($query) > 0) {
-            $data = mysqli_fetch_assoc($query);
-            mysqli_free_result($query);
-        }
-        return $data;
+        return $id;
     }
 
     /**

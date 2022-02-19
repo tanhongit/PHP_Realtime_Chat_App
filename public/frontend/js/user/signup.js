@@ -29,12 +29,12 @@ signContinueBtn.addEventListener('click', function () {
                 if (data === "success") {
                     location.href = "chat";
                 } else {
-                    errorText.style.display = "block";
-                    errorText.textContent = data;
+                    signErrorText.style.display = "block";
+                    signErrorText.textContent = data;
                 }
             }
         }
     })
-    let formData = new FormData(form);
+    let formData = new FormData(signForm);
     xhr.send(formData);
 })

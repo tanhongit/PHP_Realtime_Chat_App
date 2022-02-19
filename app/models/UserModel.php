@@ -21,7 +21,7 @@ class UserModel extends BaseModel
 
     public function store($data)
     {
-        $this->create(self::TABLE, $data);
+        return $this->create(self::TABLE, $data);
     }
 
     public function updateData($data)
