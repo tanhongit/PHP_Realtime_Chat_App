@@ -11,6 +11,7 @@ var config = {
                 '../css/styles.css',
 
                 '../js/script.js',
+                '../js/user/signup.js',
             ]
         }
     },

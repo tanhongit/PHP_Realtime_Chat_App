@@ -32,9 +32,5 @@ if (isset($_REQUEST['action']) && '' != $_REQUEST['action']) {
 $actionName = $actionParam ?? 'index';
 
 //Run
-$appController = new AppController();
 $controllerObject = new $controllerName;
-
-$appController->header();
 $controllerObject->$actionName();
-$appController->footer();
