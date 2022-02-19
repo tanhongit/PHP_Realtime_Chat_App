@@ -20,9 +20,9 @@ class Controller
      */
     protected function renderView($viewPath, array $data = [])
     {
-        require 'app/views/frontend/partial/header.php';
+        $this->renderPartial('frontend.partial.header');
         $this->renderPartial($viewPath);
-        require 'app/views/frontend/partial/footer.php';
+        $this->renderPartial('frontend.partial.footer');
     }
 
     /**

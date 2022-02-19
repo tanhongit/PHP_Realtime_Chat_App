@@ -1,4 +1,6 @@
+<?php
 
+?>
 <div class="wrapper">
     <section class="form signup">
         <header>Realtime Chat App</header>
