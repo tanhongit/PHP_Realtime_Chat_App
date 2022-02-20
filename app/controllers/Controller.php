@@ -18,7 +18,7 @@ class Controller
      * @param $viewPath
      * @param array $data
      */
-    protected function renderView($viewPath, array $data = [])
+    public function renderView($viewPath, array $data = [])
     {
         $this->renderPartial('frontend.partial.header');
         $this->renderPartial($viewPath, $data);
@@ -30,7 +30,7 @@ class Controller
      * @param $partialPath
      * @param array $data
      */
-    protected function renderPartial($partialPath, array $data = [])
+    public function renderPartial($partialPath, array $data = [])
     {
         //get data
         foreach ($data as $key => $value) {

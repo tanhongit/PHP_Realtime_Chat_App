@@ -83,3 +83,23 @@ if (signForm != null) {
         xhr.send(formData);
     })
 }
+
+const userSearchBar = document.querySelector(".users .search input"),
+    userSearchIcon = document.querySelector(".users .search button"),
+    usersList = document.querySelector(".users .users-list");
+
+setInterval(() => {
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "user/actionGetList", true);
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                let data = xhr.response;
+                if (!userSearchBar.classList.contains("active")) {
+                    usersList.innerHTML = data;
+                }
+            }
+        }
+    }
+    xhr.send();
+}, 500);

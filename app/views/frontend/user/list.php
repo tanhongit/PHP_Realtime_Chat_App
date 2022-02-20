@@ -1,15 +1,19 @@
 <?php
-if (isset($test)) {
-    echo $test;
+if (empty($currentUser['img'])) {
+    $userAvatar = 'user.png';
+} else {
+    $userAvatar = $currentUser['img'];
 }
+
 ?>
 <div class="wrapper">
     <section class="users">
         <header>
             <div class="content">
-                <img src="" alt="">
+                <img src="./public/frontend/images/<?= $userAvatar ?>" alt="">
                 <div class="details">
-
+                    <span><?= $currentUser['full_name'] ?></span>
+                    <p><?= $currentUser['status'] ?></p>
                 </div>
             </div>
             <a href="#" class="logout">Logout</a>

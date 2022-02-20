@@ -73,6 +73,7 @@ class BaseModel extends Model
     }
 
     /**
+     * Escape special characters in string
      * @param $str
      */
     public function escape($str)

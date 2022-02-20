@@ -16,10 +16,14 @@ class ChatController extends Controller
             header("location: user/login");
         }
 
-        $currentUser = $_SESSION['current_user'];
+        $currentUser = $_SESSION['current_user'][0];
 
         self::renderView('frontend.chat.index', array(
             'currentUser' => $currentUser,
         ));
+    }
+
+    public function getChat($option) {
+        return $this->chatModel->findByAttribute($option);
     }
 }

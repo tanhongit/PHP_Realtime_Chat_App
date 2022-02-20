@@ -1,6 +1,8 @@
 <?php
 if (empty($currentUser['img'])) {
     $userAvatar = 'user.png';
+} else {
+    $userAvatar = $currentUser['img'];
 }
 
 ?>
