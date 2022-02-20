@@ -182,6 +182,7 @@ class UserController extends Controller
         echo $output;
     }
 
+
     public function actionSearch()
     {
         if (isset($_SESSION['current_user'])) {
@@ -202,7 +203,7 @@ class UserController extends Controller
                 $output = "";
 
                 if (count($users) > 0) {
-
+                    $output .= $this->renderUserItem($users, $currentUser);
                 } else {
                     $output .= 'No user found related to your search keyword';
                 }
@@ -215,6 +216,12 @@ class UserController extends Controller
         echo $output;
     }
 
+    /**
+     * Render user item element
+     * @param $users
+     * @param $currentUser
+     * @return string
+     */
     public function renderUserItem($users, $currentUser)
     {
         $chatModel = new ChatController();
