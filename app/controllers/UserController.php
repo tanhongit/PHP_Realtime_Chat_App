@@ -46,7 +46,7 @@ class UserController extends Controller
                             $new_img_name = $time . '_' . $img_name;
 
                             $ran_id = rand(time(), 100000000);
-                            $status = "Active now";
+                            $status = "active";
                             $encrypt_pass = md5($password);
 
                             $model = array(
@@ -90,6 +90,33 @@ class UserController extends Controller
             } else {
                 echo "All input fields are required!";
             }
+        } else {
+            echo "Something is wrong!";
+        }
+    }
+
+    public function actionLogin()
+    {
+        if ($_POST) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            if (!empty($email) && !empty($password)) {
+                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $user = $this->userModel->findByAttribute(array('email' => $email));
+                    if (count($user) > 0) {
+echo $user['password'];
+                    } else {
+                        echo "$email - This email not exist!";
+                    }
+                } else {
+                    echo "$email is not a valid email!";
+                }
+            } else {
+                echo "All input fields are required!";
+            }
+        } else {
+            echo "Something is wrong!";
         }
     }
 }

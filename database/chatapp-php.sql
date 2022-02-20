@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `unique_id`, `full_name`, `last_name`, `email`, `password`, `img`, `status`) VALUES
-(37, 408095744, 'Test', 'LTest', 'mailer@test.com.vn', '202cb962ac59075b964b07152d234b70', '1645292877_oil3.jpg', 'Active now');
+(37, 408095744, 'Test', 'LTest', 'mailer@test.com.vn', '202cb962ac59075b964b07152d234b70', '1645292877_oil3.jpg', 'active');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
