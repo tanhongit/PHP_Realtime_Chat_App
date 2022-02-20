@@ -108,12 +108,34 @@ setInterval(() => {
 }, 1500);
 
 //search user list
-userSearchIcon.onclick = ()=>{
+userSearchIcon.onclick = () => {
     userSearchBar.classList.toggle("show");
     userSearchIcon.classList.toggle("active");
     userSearchBar.focus();
-    if(userSearchBar.classList.contains("active")){
+    if (userSearchBar.classList.contains("active")) {
         userSearchBar.value = "";
         userSearchBar.classList.remove("active");
     }
 }
+
+
+userSearchBar.addEventListener('keyup', function () {
+    let searchTerm = userSearchBar.value;
+    if (searchTerm != "") {
+        userSearchBar.classList.add("active");
+    } else {
+        userSearchBar.classList.remove("active");
+    }
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "user/actionSearch", true);
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                let data = xhr.response;
+                usersList.innerHTML = data;
+            }
+        }
+    }
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("keyword=" + searchTerm);
+})

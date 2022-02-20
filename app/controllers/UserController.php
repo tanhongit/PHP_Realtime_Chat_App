@@ -171,37 +171,7 @@ class UserController extends Controller
             );
 
             if (count($users) > 0) {
-                $chatModel = new ChatController();
-
-                foreach ($users as $user) {
-                    $chat = $chatModel->getChat(
-                        array(
-                            'order_by' => 'id DESC',
-                            'limit' => 1,
-                            'where' => '(incoming_msg_id = ' . $user['unique_id'] . ' 
-                                OR outgoing_msg_id = ' . $user['unique_id'] . ') 
-                                AND (outgoing_msg_id = ' . $currentUser['unique_id'] . ' 
-                                    OR incoming_msg_id = ' . $currentUser['unique_id'] . ')',
-                        )
-                    );
-
-                    $result = count($chat) > 0 ? $chat[0]['message'] : 'No message available';
-                    $message = strlen($result) > 28 ? substr($result, 0, 28) . '...' : $result;
-
-                    $yourTag = '';
-                    if (isset($chat[0]['outgoing_msg_id'])) {
-                        $yourTag = $currentUser['unique_id'] == $chat[0]['outgoing_msg_id'] ? "You: " : "";
-                    }
-
-                    $status = $user['status'] == UserModel::USER_OFF ? 'offline' : '';
-
-                    $output .= $this->renderPartial('frontend.user.partial.user_item', array(
-                        'user' => $user,
-                        'message' => $message,
-                        'yourTag' => $yourTag,
-                        'status' => $status
-                    ));
-                }
+                $output .= $this->renderUserItem($users, $currentUser);
             } else {
                 $output = 'No users are available to chat';
             }
@@ -210,5 +180,75 @@ class UserController extends Controller
         }
 
         echo $output;
+    }
+
+    public function actionSearch()
+    {
+        if (isset($_SESSION['current_user'])) {
+            $currentUser = $_SESSION['current_user'][0];
+
+            if ($_POST) {
+                $keyword = $this->userModel->escape($_POST['keyword']);
+
+                $options = array(
+                    'where' => 'NOT unique_id = ' . $currentUser['unique_id'] . ' 
+                                AND (full_name LIKE "%' . $keyword . '%" 
+                                    OR last_name LIKE "%' . $keyword . '%")',
+                    'order_by' => 'id DESC'
+                );
+
+                $users = $this->userModel->findByAttribute($options);
+
+                $output = "";
+
+                if (count($users) > 0) {
+
+                } else {
+                    $output .= 'No user found related to your search keyword';
+                }
+            } else {
+                $output = 'Something is wrong!';
+            }
+        } else {
+            $output = 'Something is wrong!';
+        }
+        echo $output;
+    }
+
+    public function renderUserItem($users, $currentUser)
+    {
+        $chatModel = new ChatController();
+        $output = '';
+
+        foreach ($users as $user) {
+            $chat = $chatModel->getChat(
+                array(
+                    'order_by' => 'id DESC',
+                    'limit' => 1,
+                    'where' => '(incoming_msg_id = ' . $user['unique_id'] . ' 
+                                OR outgoing_msg_id = ' . $user['unique_id'] . ') 
+                                AND (outgoing_msg_id = ' . $currentUser['unique_id'] . ' 
+                                    OR incoming_msg_id = ' . $currentUser['unique_id'] . ')',
+                )
+            );
+
+            $result = count($chat) > 0 ? $chat[0]['message'] : 'No message available';
+            $message = strlen($result) > 28 ? substr($result, 0, 28) . '...' : $result;
+
+            $yourTag = '';
+            if (isset($chat[0]['outgoing_msg_id'])) {
+                $yourTag = $currentUser['unique_id'] == $chat[0]['outgoing_msg_id'] ? "You: " : "";
+            }
+
+            $status = $user['status'] == UserModel::USER_OFF ? 'offline' : '';
+
+            $output .= $this->renderPartial('frontend.user.partial.user_item', array(
+                'user' => $user,
+                'message' => $message,
+                'yourTag' => $yourTag,
+                'status' => $status
+            ));
+        }
+        return $output;
     }
 }
