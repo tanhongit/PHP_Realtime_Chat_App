@@ -1,4 +1,4 @@
 <?php
-echo 'Frontend index';
+echo 'User index';
 
 ?>

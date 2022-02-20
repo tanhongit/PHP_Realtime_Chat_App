@@ -182,7 +182,6 @@ class UserController extends Controller
         echo $output;
     }
 
-
     public function actionSearch()
     {
         if (isset($_SESSION['current_user'])) {
@@ -257,5 +256,12 @@ class UserController extends Controller
             ));
         }
         return $output;
+    }
+
+    public function getUserByUID($user_id)
+    {
+        return $this->userModel->findByAttribute(array(
+            'where' => 'unique_id=' . $user_id,
+        ));
     }
 }

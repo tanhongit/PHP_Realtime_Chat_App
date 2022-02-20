@@ -1,19 +1,19 @@
 <?php
-if (empty($currentUser['img'])) {
+if (empty($user_detail['img'])) {
     $userAvatar = 'user.png';
 } else {
-    $userAvatar = $currentUser['img'];
+    $userAvatar = $user_detail['img'];
 }
 
 ?>
 <div class="wrapper">
     <section class="chat-area">
         <header>
-            <a href="users" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+            <a href="user/list" class="back-icon"><i class="fas fa-arrow-left"></i></a>
             <img src="./public/frontend/images/<?= $userAvatar ?>" alt="">
             <div class="details">
-                <span><?= $currentUser['full_name'] ?></span>
-                <p><?= $currentUser['status'] ?></p>
+                <span><?= $user_detail['full_name'] ?></span>
+                <p><?= $user_detail['status'] ?></p>
             </div>
         </header>
 

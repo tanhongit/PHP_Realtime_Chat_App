@@ -18,12 +18,26 @@ class ChatController extends Controller
 
         $currentUser = $_SESSION['current_user'][0];
 
-        self::renderView('frontend.chat.index', array(
-            'currentUser' => $currentUser,
-        ));
+        if (!empty($_GET['user_id'])) {
+            $user_id = $this->chatModel->escape($_GET['user_id']);
+            $user = new UserController();
+            $user_detail = $user->getUserByUID($user_id);
+
+            if (count($user_detail) > 0) {
+                self::renderView('frontend.chat.index', array(
+                    'currentUser' => $currentUser,
+                    'user_detail' => $user_detail[0],
+                ));
+            } else {
+                header("location: user/list");
+            }
+        } else {
+            header("location: user/list");
+        }
     }
 
-    public function getChat($option) {
+    public function getChat($option)
+    {
         return $this->chatModel->findByAttribute($option);
     }
 }
