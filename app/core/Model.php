@@ -83,4 +83,12 @@ class Model extends Database
         $str = preg_replace("/( )/", '-', $str);
         return $str;
     }
+
+    /**
+     * @param $str
+     */
+    public function escape($str)
+    {
+        $this->_query($str);
+    }
 }

@@ -16,7 +16,7 @@ if (logForm != null) {
         }
     })
 
-    logContinueBtn.addEventListener('submit', function (e) {
+    logForm.addEventListener('submit', function (e) {
         e.preventDefault();
     })
 

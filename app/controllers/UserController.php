@@ -103,14 +103,32 @@ class UserController extends Controller
         if ($_POST) {
             $email = $_POST['email'];
             $password = $_POST['password'];
-
+            $result = 0;
             if (!empty($email) && !empty($password)) {
                 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $user = $this->userModel->findByAttribute(array('email' => $email));
+                    $user = $this->userModel->findByAttribute(array(
+                        'where' => 'email = "' . $email . '"'
+                    ));
                     if (count($user) > 0) {
-                        echo $user['password'];
+                        if (md5($password) == $user[0]['password']) {
+                            $option = array(
+                                'id' => $user[0]['id'],
+                                'status' => 'active'
+                            );
+
+                            $result = (int)$this->userModel->updateData($option);
+
+                            if ($result > 0) {
+                                echo "success";
+                            } else {
+                                echo "Something is wrong!";
+                            }
+                        } else {
+                            echo "Email or Password is Incorrect!";
+                        }
                     } else {
-                        echo "$email - This email not exist!";
+                        //echo "$email - This email not exist!";
+                        echo 'Email or Password is Incorrect!';
                     }
                 } else {
                     echo "$email is not a valid email!";

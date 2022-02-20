@@ -26,7 +26,7 @@ class UserModel extends BaseModel
 
     public function updateData($data)
     {
-        $this->update(self::TABLE, $data);
+        return $this->update(self::TABLE, $data);
     }
 
     public function findByAttribute($attributes)
