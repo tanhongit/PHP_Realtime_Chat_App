@@ -12,16 +12,28 @@ class UserController extends Controller
 
     public function login()
     {
+        if (isset($_SESSION['current_user'])) {
+            header("location: chat");
+        }
+
         $this->renderView('frontend.user.login');
     }
 
     public function signup()
     {
+        if (isset($_SESSION['current_user'])) {
+            header("location: chat");
+        }
+
         $this->renderView('frontend.user.signup');
     }
 
     public function list()
     {
+        if (!isset($_SESSION['current_user'])) {
+            header("location: user/login");
+        }
+
         $this->renderView('frontend.user.list', array('test' => 1));
     }
 
@@ -119,6 +131,7 @@ class UserController extends Controller
                             $result = (int)$this->userModel->updateData($option);
 
                             if ($result > 0) {
+                                $_SESSION['current_user'] = $user;
                                 echo "success";
                             } else {
                                 echo "Something is wrong!";
