@@ -1,3 +1,4 @@
+//login
 const logForm = document.querySelector(".login.form form");
 
 if (logForm != null) {
@@ -41,6 +42,7 @@ if (logForm != null) {
     })
 }
 
+//signin
 const signForm = document.querySelector(".signup.form form");
 
 if (signForm != null) {
@@ -84,6 +86,7 @@ if (signForm != null) {
     })
 }
 
+//load user list
 const userSearchBar = document.querySelector(".users .search input"),
     userSearchIcon = document.querySelector(".users .search button"),
     usersList = document.querySelector(".users .users-list");
@@ -102,4 +105,15 @@ setInterval(() => {
         }
     }
     xhr.send();
-}, 500);
+}, 1500);
+
+//search user list
+userSearchIcon.onclick = ()=>{
+    userSearchBar.classList.toggle("show");
+    userSearchIcon.classList.toggle("active");
+    userSearchBar.focus();
+    if(userSearchBar.classList.contains("active")){
+        userSearchBar.value = "";
+        userSearchBar.classList.remove("active");
+    }
+}
