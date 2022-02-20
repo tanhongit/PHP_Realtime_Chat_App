@@ -35,7 +35,10 @@ class UserController extends Controller
 
             if (!empty($fname) && !empty($lname) && !empty($email) && !empty($password)) {
                 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $user = $this->userModel->findByAttribute(array('email' => $email));
+                    $user = $this->userModel->findByAttribute(array(
+                            'where' => 'email = "' . $email . '"'
+                        )
+                    );
                     if (count($user) > 0) {
                         echo "$email - This email already exist!";
                     } else {
@@ -105,7 +108,7 @@ class UserController extends Controller
                 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $user = $this->userModel->findByAttribute(array('email' => $email));
                     if (count($user) > 0) {
-echo $user['password'];
+                        echo $user['password'];
                     } else {
                         echo "$email - This email not exist!";
                     }

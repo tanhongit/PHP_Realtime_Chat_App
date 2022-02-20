@@ -47,9 +47,9 @@ class BaseModel extends Model
      * @param $table
      * @return array|void
      */
-    public function all($table)
+    public function all($table, $attributes)
     {
-        return $this->getByOptions($table);
+        return $this->getByOptions($table, $attributes);
     }
 
     /**
