@@ -20,10 +20,10 @@ if (empty($user_detail['img'])) {
         <div class="chat-box"></div>
 
         <form action="#" class="typing-area">
-            <input type="text" class="incoming_id" name="incoming_id" value="1" hidden>
+            <input type="text" class="incoming_id" name="incoming_id" value="<?= $user_detail['unique_id'] ?>" hidden>
             <input type="text" name="message" class="input-field" placeholder="Type a message here..."
                    autocomplete="off">
-            <button><i class="fab fa-telegram-plane"></i></button>
+            <button class="btn-send"><i class="fab fa-telegram-plane"></i></button>
         </form>
     </section>
 </div>

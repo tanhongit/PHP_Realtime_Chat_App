@@ -87,55 +87,56 @@ if (signForm != null) {
 }
 
 //load user list
-const userSearchBar = document.querySelector(".users .search input"),
-    userSearchIcon = document.querySelector(".users .search button"),
-    usersList = document.querySelector(".users .users-list");
+const userSearchBar = document.querySelector(".users .search input");
+if (userSearchBar != null) {
+    const userSearchIcon = document.querySelector(".users .search button"),
+        usersList = document.querySelector(".users .users-list");
 
-setInterval(() => {
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", "user/actionGetList", true);
-    xhr.onload = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                let data = xhr.response;
-                if (!userSearchBar.classList.contains("active")) {
+    setInterval(() => {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "user/actionGetList", true);
+        xhr.onload = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    let data = xhr.response;
+                    if (!userSearchBar.classList.contains("active")) {
+                        usersList.innerHTML = data;
+                    }
+                }
+            }
+        }
+        xhr.send();
+    }, 1500);
+
+    //search user list
+    userSearchIcon.onclick = () => {
+        userSearchBar.classList.toggle("show");
+        userSearchIcon.classList.toggle("active");
+        userSearchBar.focus();
+        if (userSearchBar.classList.contains("active")) {
+            userSearchBar.value = "";
+            userSearchBar.classList.remove("active");
+        }
+    }
+
+    userSearchBar.addEventListener('keyup', function () {
+        let searchTerm = userSearchBar.value;
+        if (searchTerm != "") {
+            userSearchBar.classList.add("active");
+        } else {
+            userSearchBar.classList.remove("active");
+        }
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "user/actionSearch", true);
+        xhr.onload = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    let data = xhr.response;
                     usersList.innerHTML = data;
                 }
             }
         }
-    }
-    xhr.send();
-}, 1500);
-
-//search user list
-userSearchIcon.onclick = () => {
-    userSearchBar.classList.toggle("show");
-    userSearchIcon.classList.toggle("active");
-    userSearchBar.focus();
-    if (userSearchBar.classList.contains("active")) {
-        userSearchBar.value = "";
-        userSearchBar.classList.remove("active");
-    }
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send("keyword=" + searchTerm);
+    })
 }
-
-
-userSearchBar.addEventListener('keyup', function () {
-    let searchTerm = userSearchBar.value;
-    if (searchTerm != "") {
-        userSearchBar.classList.add("active");
-    } else {
-        userSearchBar.classList.remove("active");
-    }
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "user/actionSearch", true);
-    xhr.onload = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                let data = xhr.response;
-                usersList.innerHTML = data;
-            }
-        }
-    }
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send("keyword=" + searchTerm);
-})
