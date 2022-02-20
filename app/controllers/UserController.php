@@ -40,9 +40,9 @@ class UserController extends Controller
     public function actionSignup()
     {
         if ($_POST) {
-            $fname = $_POST['fname'];
-            $lname = $_POST['lname'];
-            $email = $_POST['email'];
+            $fname = $this->userModel->escape($_POST['fname']);
+            $lname = $this->userModel->escape($_POST['lname']);
+            $email = $this->userModel->escape($_POST['email']);
             $password = $_POST['password'];
 
             if (!empty($fname) && !empty($lname) && !empty($email) && !empty($password)) {
@@ -113,7 +113,7 @@ class UserController extends Controller
     public function actionLogin()
     {
         if ($_POST) {
-            $email = $_POST['email'];
+            $email = $this->userModel->escape($_POST['email']);
             $password = $_POST['password'];
             $result = 0;
             if (!empty($email) && !empty($password)) {

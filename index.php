@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 //require all PHP files from a directory
 $folderList = array(

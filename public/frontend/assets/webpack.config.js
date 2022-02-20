@@ -12,6 +12,7 @@ var config = {
 
                 '../js/script.js',
                 '../js/user.js',
+                '../js/chat.js',
             ]
         }
     },

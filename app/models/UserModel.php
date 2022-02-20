@@ -4,6 +4,9 @@ class UserModel extends BaseModel
 {
     const TABLE = 'users';
 
+    const USER_ACTIVE = 'active';
+    const USER_OFF = 'off';
+
     public function getAll()
     {
         return $this->all(self::TABLE);

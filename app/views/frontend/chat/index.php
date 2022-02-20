@@ -1,11 +1,17 @@
+<?php
+if (empty($currentUser['img'])) {
+    $userAvatar = 'user.png';
+}
+
+?>
 <div class="wrapper">
     <section class="chat-area">
         <header>
             <a href="users" class="back-icon"><i class="fas fa-arrow-left"></i></a>
-            <img src="#" alt="">
+            <img src="./public/frontend/images/<?= $userAvatar ?>" alt="">
             <div class="details">
-                <span>Name</span>
-                <p>status</p>
+                <span><?= $currentUser['full_name'] ?></span>
+                <p><?= $currentUser['status'] ?></p>
             </div>
         </header>
 

@@ -71,4 +71,12 @@ class BaseModel extends Model
     {
         return mysqli_query($this->connectResult, $sql);
     }
+
+    /**
+     * @param $str
+     */
+    public function escape($str)
+    {
+        return mysqli_real_escape_string($this->connectResult, $str);
+    }
 }

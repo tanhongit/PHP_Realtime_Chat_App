@@ -1,6 +1,6 @@
 <?php
 
-class ChatModel
+class ChatModel extends BaseModel
 {
 
 }

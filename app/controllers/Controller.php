@@ -21,7 +21,7 @@ class Controller
     protected function renderView($viewPath, array $data = [])
     {
         $this->renderPartial('frontend.partial.header');
-        $this->renderPartial($viewPath);
+        $this->renderPartial($viewPath, $data);
         $this->renderPartial('frontend.partial.footer');
     }
 
