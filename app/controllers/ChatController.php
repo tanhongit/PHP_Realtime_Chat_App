@@ -67,6 +67,6 @@ class ChatController extends Controller
     }
 
     public function getChatItem() {
-
+        
     }
 }

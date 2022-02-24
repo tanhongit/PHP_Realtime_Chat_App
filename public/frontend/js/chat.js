@@ -41,9 +41,29 @@ if (chatBox != null) {
         xhr.send(formData);
     })
 
-    function scrollToBottom(){
+    function scrollToBottom() {
         chatBox.scrollTop = chatBox.scrollHeight;
     }
+
+    //get chat item
+    setInterval(function () {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "chat/actionGetChatItem", true);
+        xhr.onload = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    let data = xhr.response;
+                    chatBox.innerHTML = data;
+                    //check, load bottom when deactivate chat box
+                    if (!chatBox.classList.contains("active")) {
+                        scrollToBottom();
+                    }
+                }
+            }
+        }
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send("incoming_id=" + chatIncomingId);
+    }, 500);
 }
 
 
