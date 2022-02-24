@@ -32,12 +32,18 @@ if (chatBox != null) {
         xhr.onload = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
+                    chatInputField.value = "";
+                    scrollToBottom();
                 }
             }
         }
         let formData = new FormData(chatForm);
         xhr.send(formData);
     })
+
+    function scrollToBottom(){
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 }
 
 
