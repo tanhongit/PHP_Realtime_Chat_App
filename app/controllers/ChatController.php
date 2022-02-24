@@ -6,16 +6,16 @@ class ChatController extends Controller
 
     public function __construct()
     {
+        if (!isset($_SESSION['current_user'])) {
+            header("location: /user/login");
+        }
+
         $this->loadModel('ChatModel');
         $this->chatModel = new ChatModel;
     }
 
     public function index()
     {
-        if (!isset($_SESSION['current_user'])) {
-            header("location: user/login");
-        }
-
         $currentUser = $_SESSION['current_user'][0];
 
         if (!empty($_GET['user_id'])) {
@@ -29,10 +29,10 @@ class ChatController extends Controller
                     'user_detail' => $userDetail[0],
                 ));
             } else {
-                header("location: user/list");
+                header("location: /user/list");
             }
         } else {
-            header("location: user/list");
+            header("location: /user/list");
         }
     }
 
@@ -47,10 +47,6 @@ class ChatController extends Controller
 
     public function actionAddChatItem()
     {
-        if (!isset($_SESSION['current_user'])) {
-            header("location: user/login");
-        }
-
         if ($_POST) {
             $currentUser = $_SESSION['current_user'][0];
             $incomingId = $this->chatModel->escape($_POST['incoming_id']);
@@ -66,7 +62,25 @@ class ChatController extends Controller
         }
     }
 
-    public function getChatItem() {
-        
+    public function getChatItem()
+    {
+        if ($_POST) {
+            $currentUser = $_SESSION['current_user'][0];
+            $incomingId = $this->chatModel->escape($_POST['incoming_id']);
+
+            $model = array(
+                'join' => 'users ON users.unique_id = messages.outgoing_msg_id',
+                'where' => '(outgoing_msg_id = ' . $currentUser['id'] . ' AND incoming_msg_id = ' . $incomingId . ')
+                    OR (outgoing_msg_id = ' . $incomingId . ' AND incoming_msg_id = ' . $currentUser['id'] . ')',
+                'order_by' => 'id',
+            );
+
+            $result = $this->chatModel->findByAttribute($model);
+
+            $output = '';
+            if (count($result) > 0) {
+
+            }
+        }
     }
 }

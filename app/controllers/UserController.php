@@ -13,7 +13,7 @@ class UserController extends Controller
     public function login()
     {
         if (isset($_SESSION['current_user'])) {
-            header("location: chat");
+            header("location: /chat");
         }
 
         $this->renderView('frontend.user.login');
@@ -22,7 +22,7 @@ class UserController extends Controller
     public function signup()
     {
         if (isset($_SESSION['current_user'])) {
-            header("location: chat");
+            header("location: /chat");
         }
 
         $this->renderView('frontend.user.signup');
@@ -31,7 +31,7 @@ class UserController extends Controller
     public function list()
     {
         if (!isset($_SESSION['current_user'])) {
-            header("location: user/login");
+            header("location: /user/login");
         }
 
         $currentUser = $_SESSION['current_user'][0];
