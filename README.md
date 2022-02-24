@@ -1,6 +1,7 @@
-# Welcome to PHP Realtime Chat App MVC Model by TANHONGIT
-
+# Welcome to PHP Realtime Chat App MVC Model
 Create a Chat Application using PHP MVC model with MySQL & JavaScript.
+
+## __This source structure is cloned from project [`php-mvc-structure`](https://github.com/TanHongIT/php-mvc-structure)__
 
 # 1. Configuration requirements
 
