@@ -45,7 +45,7 @@ class ChatController extends Controller
         return $this->chatModel->findByAttribute($option);
     }
 
-    public function insertChatItem()
+    public function actionAddChatItem()
     {
         if (!isset($_SESSION['current_user'])) {
             header("location: user/login");
@@ -64,5 +64,9 @@ class ChatController extends Controller
 
             $result = $this->chatModel->store($model);
         }
+    }
+
+    public function getChatItem() {
+
     }
 }

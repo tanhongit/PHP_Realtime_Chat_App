@@ -1,7 +1,7 @@
 const chatForm = document.querySelector(".chat-area .typing-area"),
     chatBox = document.querySelector(".chat-area .chat-box");
 if (chatBox != null) {
-    const chatIncoming_id = chatForm.querySelector(".incoming_id").value,
+    const chatIncomingId = chatForm.querySelector(".incoming_id").value,
         chatInputField = chatForm.querySelector(".input-field"),
         chatSendBtn = chatForm.querySelector(".chat-area button.btn-send");
 
@@ -23,6 +23,20 @@ if (chatBox != null) {
     })
     chatBox.addEventListener('mouseleave', function (e) {
         chatBox.classList.remove("active");
+    })
+
+    //insert chat item
+    chatSendBtn.addEventListener('click', function (e) {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "chat/actionAddChatItem", true);
+        xhr.onload = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                }
+            }
+        }
+        let formData = new FormData(chatForm);
+        xhr.send(formData);
     })
 }
 
