@@ -1,5 +1,12 @@
+<?php
+/**
+ * @var array $item
+ */
+
+?>
+
 <div class="chat outgoing">
     <div class="details">
-        <p></p>
+        <p><?= $item['message'] ?></p>
     </div>
 </div>

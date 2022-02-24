@@ -63,7 +63,7 @@ if (chatBox != null) {
         }
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send("incoming_id=" + chatIncomingId);
-    }, 500);
+    }, 1500);
 }
 
 

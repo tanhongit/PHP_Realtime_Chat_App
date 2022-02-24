@@ -1,6 +1,18 @@
+<?php
+/**
+ * @var array $item
+ */
+
+if (empty($item['img'])) {
+    $userAvatar = 'user.png';
+} else {
+    $userAvatar = $item['img'];
+}
+?>
+
 <div class="chat incoming">
-    <img src="#" alt="">
+    <img src="<?= $userAvatar ?>" alt="">
     <div class="details">
-        <p></p>
+        <p><?= $item['message'] ?></p>
     </div>
 </div>

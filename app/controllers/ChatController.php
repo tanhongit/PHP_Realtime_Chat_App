@@ -62,25 +62,39 @@ class ChatController extends Controller
         }
     }
 
-    public function getChatItem()
+    public function actionGetChatItem()
     {
         if ($_POST) {
             $currentUser = $_SESSION['current_user'][0];
             $incomingId = $this->chatModel->escape($_POST['incoming_id']);
 
             $model = array(
-                'join' => 'users ON users.unique_id = messages.outgoing_msg_id',
+                'join' => 'users ON users.unique_id = chats.outgoing_msg_id',
                 'where' => '(outgoing_msg_id = ' . $currentUser['id'] . ' AND incoming_msg_id = ' . $incomingId . ')
                     OR (outgoing_msg_id = ' . $incomingId . ' AND incoming_msg_id = ' . $currentUser['id'] . ')',
-                'order_by' => 'id',
+                'order_by' => 'chats.id',
             );
 
             $result = $this->chatModel->findByAttribute($model);
 
             $output = '';
             if (count($result) > 0) {
+                foreach ($result as $item) {
+                    if ($item['outgoing_msg_id'] == $currentUser['id']) {
+                        $output .= $this->renderPartial('frontend.chat.partial.left_chat_item', array(
+                            'item' => $item
+                        ));
+                    } else {
+                        $output .= $this->renderPartial('frontend.chat.partial.right_chat_item', array(
+                            'item' => $item
+                        ));
+                    }
 
+                }
+            } else {
+                $output .= $this->renderPartial('frontend.chat.partial.not_message');
             }
+            echo $output;
         }
     }
 }
