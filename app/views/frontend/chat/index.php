@@ -20,6 +20,7 @@ if (empty($user_detail['img'])) {
         <div class="chat-box"></div>
 
         <form action="#" class="typing-area">
+            <input type="text" class="chat_user_id" name="chat_user_id" value="<?= $user_detail['id'] ?>" hidden>
             <input type="text" class="incoming_id" name="incoming_id" value="<?= $user_detail['unique_id'] ?>" hidden>
             <input type="text" name="message" class="input-field" placeholder="Type a message here..."
                    autocomplete="off">

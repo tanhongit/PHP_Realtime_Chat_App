@@ -2,7 +2,7 @@ const chatForm = document.querySelector(".chat-area .typing-area"),
     chatBox = document.querySelector(".chat-area .chat-box");
 if (chatBox != null) {
     const chatIncomingId = chatForm.querySelector(".incoming_id").value,
-        chatInputField = chatForm.querySelector(".input-field"),
+        chatInputField = chatForm.querySelector('input[name="message"]'),
         chatSendBtn = chatForm.querySelector(".chat-area button.btn-send");
 
     chatForm.addEventListener('submit', function (e) {
@@ -61,9 +61,10 @@ if (chatBox != null) {
                 }
             }
         }
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send("incoming_id=" + chatIncomingId);
+        let formData = new FormData(chatForm);
+        xhr.send(formData);
     }, 1500);
+
 }
 
 

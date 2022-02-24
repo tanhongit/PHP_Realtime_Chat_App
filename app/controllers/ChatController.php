@@ -67,11 +67,12 @@ class ChatController extends Controller
         if ($_POST) {
             $currentUser = $_SESSION['current_user'][0];
             $incomingId = $this->chatModel->escape($_POST['incoming_id']);
+            $chatUserID = $this->chatModel->escape($_POST['chat_user_id']);
 
             $model = array(
-                'join' => 'users ON users.unique_id = chats.outgoing_msg_id',
+                'join' => 'users as u ON u.unique_id = incoming_msg_id',
                 'where' => '(outgoing_msg_id = ' . $currentUser['id'] . ' AND incoming_msg_id = ' . $incomingId . ')
-                    OR (outgoing_msg_id = ' . $incomingId . ' AND incoming_msg_id = ' . $currentUser['id'] . ')',
+                    OR (outgoing_msg_id = ' . $chatUserID . ' AND incoming_msg_id = ' . $currentUser['unique_id'] . ')',
                 'order_by' => 'chats.id',
             );
 
@@ -89,7 +90,6 @@ class ChatController extends Controller
                             'item' => $item
                         ));
                     }
-
                 }
             } else {
                 $output .= $this->renderPartial('frontend.chat.partial.not_message');
