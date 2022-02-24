@@ -36,6 +36,10 @@ class ChatController extends Controller
         }
     }
 
+    /**
+     * @param $option
+     * @return array|void
+     */
     public function getChat($option)
     {
         return $this->chatModel->findByAttribute($option);

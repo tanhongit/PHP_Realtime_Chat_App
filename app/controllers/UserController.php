@@ -258,6 +258,10 @@ class UserController extends Controller
         return $output;
     }
 
+    /**
+     * @param $user_id
+     * @return array|void
+     */
     public function getUserByUID($user_id)
     {
         return $this->userModel->findByAttribute(array(
