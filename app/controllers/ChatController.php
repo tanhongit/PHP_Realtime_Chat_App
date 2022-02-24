@@ -19,14 +19,14 @@ class ChatController extends Controller
         $currentUser = $_SESSION['current_user'][0];
 
         if (!empty($_GET['user_id'])) {
-            $user_id = $this->chatModel->escape($_GET['user_id']);
+            $userId = $this->chatModel->escape($_GET['user_id']);
             $user = new UserController();
-            $user_detail = $user->getUserByUID($user_id);
+            $userDetail = $user->getUserByUID($userId);
 
-            if (count($user_detail) > 0) {
+            if (count($userDetail) > 0) {
                 self::renderView('frontend.chat.index', array(
                     'currentUser' => $currentUser,
-                    'user_detail' => $user_detail[0],
+                    'user_detail' => $userDetail[0],
                 ));
             } else {
                 header("location: user/list");
@@ -43,5 +43,26 @@ class ChatController extends Controller
     public function getChat($option)
     {
         return $this->chatModel->findByAttribute($option);
+    }
+
+    public function insertChatItem()
+    {
+        if (!isset($_SESSION['current_user'])) {
+            header("location: user/login");
+        }
+
+        if ($_POST) {
+            $currentUser = $_SESSION['current_user'][0];
+            $incomingId = $this->chatModel->escape($_POST['incoming_id']);
+            $message = $this->chatModel->escape($_POST['message']);
+
+            $model = array(
+                'outgoing_msg_id' => $currentUser['id'],
+                'incoming_msg_id' => $incomingId,
+                'message' => $message,
+            );
+
+            $result = $this->chatModel->store($model);
+        }
     }
 }
