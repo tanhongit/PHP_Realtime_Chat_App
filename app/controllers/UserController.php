@@ -41,6 +41,24 @@ class UserController extends Controller
         ));
     }
 
+    public function logout()
+    {
+        if (isset($_SESSION['current_user'])) {
+            $status = 'off';
+            $model = array(
+                'id' => $_SESSION['current_user'][0]['id'],
+                'status' => $status,
+            );
+            if ($this->userModel->updateData($model)) {
+                session_unset();
+                session_destroy();
+                header("location: /user/login");
+            }
+        } else {
+            header("location: /user/login");
+        }
+    }
+
     public function actionSignup()
     {
         if ($_POST) {
