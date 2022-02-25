@@ -44,10 +44,9 @@ class UserController extends Controller
     public function logout()
     {
         if (isset($_SESSION['current_user'])) {
-            $status = 'off';
             $model = array(
                 'id' => $_SESSION['current_user'][0]['id'],
-                'status' => $status,
+                'status' => UserModel::USER_OFF,
             );
             if ($this->userModel->updateData($model)) {
                 session_unset();
@@ -83,7 +82,7 @@ class UserController extends Controller
                             $new_img_name = $time . '_' . $img_name;
 
                             $ran_id = rand(time(), 100000000);
-                            $status = "active";
+                            $status = UserModel::USER_ACTIVE;
                             $encrypt_pass = md5($password);
 
                             $model = array(
@@ -147,14 +146,14 @@ class UserController extends Controller
                         if (md5($password) == $user[0]['password']) {
                             $option = array(
                                 'id' => $user[0]['id'],
-                                'status' => 'active'
+                                'status' => UserModel::USER_ACTIVE,
                             );
 
                             $result = (int)$this->userModel->updateData($option);
 
                             if ($result > 0) {
                                 $_SESSION['current_user'] = $user;
-                                $_SESSION['current_user'][0]['status'] = 'active';
+                                $_SESSION['current_user'][0]['status'] = UserModel::USER_ACTIVE;
                                 echo "success";
                             } else {
                                 echo "Something is wrong!";
@@ -265,6 +264,7 @@ class UserController extends Controller
                 $yourTag = $currentUser['unique_id'] == $chat[0]['outgoing_msg_id'] ? "You: " : "";
             }
 
+            //set class html
             $status = $user['status'] == UserModel::USER_OFF ? 'offline' : '';
 
             $output .= $this->renderPartial('frontend.user.partial.user_item', array(
