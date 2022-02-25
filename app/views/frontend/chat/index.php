@@ -13,7 +13,7 @@ if (empty($user_detail['img'])) {
             <img src="./public/frontend/images/<?= $userAvatar ?>" alt="">
             <div class="details">
                 <span><?= $user_detail['full_name'] ?></span>
-                <p><?= $user_detail['status'] ?></p>
+                <p><?= ucwords($user_detail['status']) ?></p>
             </div>
         </header>
 

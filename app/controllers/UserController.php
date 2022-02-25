@@ -154,6 +154,7 @@ class UserController extends Controller
 
                             if ($result > 0) {
                                 $_SESSION['current_user'] = $user;
+                                $_SESSION['current_user'][0]['status'] = 'active';
                                 echo "success";
                             } else {
                                 echo "Something is wrong!";
