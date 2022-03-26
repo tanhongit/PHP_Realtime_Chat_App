@@ -19,7 +19,7 @@ This Project is using webpack in order to compile Javascript modules and compile
 Run:
 
 ```
-$ cd public\frontend\assets
+$ cd public/frontend/assets
 $ npm install
 $ npm run build
 ```
