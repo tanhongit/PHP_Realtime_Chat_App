@@ -9,7 +9,7 @@
 
 <a href="chat?user_id=<?= $user['unique_id'] ?>">
     <div class="content">
-        <img src="./public/frontend/images/<?= empty($user['img']) ? 'user.png' : $user['img'] ?>" alt="">
+        <img src="/public/frontend/images/<?= empty($user['img']) ? 'user.png' : $user['img'] ?>" alt="">
         <div class="details">
             <span><?= $user['full_name'] ?></span>
             <p><?= $yourTag . $message ?></p>

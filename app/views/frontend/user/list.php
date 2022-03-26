@@ -10,7 +10,7 @@ if (empty($currentUser['img'])) {
     <section class="users">
         <header>
             <div class="content">
-                <img src="./public/frontend/images/<?= $userAvatar ?>" alt="">
+                <img src="/public/frontend/images/<?= $userAvatar ?>" alt="">
                 <div class="details">
                     <span><?= $currentUser['full_name'] ?></span>
                     <p><?= ucwords($currentUser['status']) ?></p>
