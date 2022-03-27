@@ -23,13 +23,13 @@ if (logForm != null) {
 
     logContinueBtn.addEventListener('click', function () {
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "user/actionLogin", true);
+        xhr.open("POST", "/user/actionLogin", true);
         xhr.addEventListener('load', function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     let data = xhr.response;
                     if (data === "success") {
-                        location.href = "chat";
+                        location.href = "/chat";
                     } else {
                         logErrorText.style.display = "block";
                         logErrorText.textContent = data;
@@ -67,13 +67,13 @@ if (signForm != null) {
 
     signContinueBtn.addEventListener('click', function () {
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "user/actionSignup", true);
+        xhr.open("POST", "/user/actionSignup", true);
         xhr.addEventListener('load', function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     let data = xhr.response;
                     if (data === "success") {
-                        location.href = "chat";
+                        location.href = "/chat";
                     } else {
                         signErrorText.style.display = "block";
                         signErrorText.textContent = data;
@@ -94,7 +94,7 @@ if (userSearchBar != null) {
 
     setInterval(() => {
         let xhr = new XMLHttpRequest();
-        xhr.open("GET", "user/actionGetList", true);
+        xhr.open("GET", "/user/actionGetList", true);
         xhr.onload = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
@@ -127,7 +127,7 @@ if (userSearchBar != null) {
             userSearchBar.classList.remove("active");
         }
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "user/actionSearch", true);
+        xhr.open("POST", "/user/actionSearch", true);
         xhr.onload = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {

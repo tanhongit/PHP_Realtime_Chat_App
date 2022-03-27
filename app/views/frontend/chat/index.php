@@ -9,7 +9,7 @@ if (empty($user_detail['img'])) {
 <div class="wrapper">
     <section class="chat-area">
         <header>
-            <a href="user/list" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+            <a href="/user/list" class="back-icon"><i class="fas fa-arrow-left"></i></a>
             <img src="/public/frontend/images/<?= $userAvatar ?>" alt="">
             <div class="details">
                 <span><?= $user_detail['full_name'] ?></span>

@@ -28,7 +28,7 @@ if (chatBox != null) {
     //insert chat item
     chatSendBtn.addEventListener('click', function (e) {
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "chat/actionAddChatItem", true);
+        xhr.open("POST", "/chat/actionAddChatItem", true);
         xhr.onload = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
@@ -48,7 +48,7 @@ if (chatBox != null) {
     //get chat item
     setInterval(function () {
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "chat/actionGetChatItem", true);
+        xhr.open("POST", "/chat/actionGetChatItem", true);
         xhr.onload = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
