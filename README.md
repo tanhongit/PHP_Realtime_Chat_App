@@ -11,6 +11,7 @@ Create a Chat Application using PHP MVC model with MySQL & JavaScript.
 # 2. Technology
 - Pure PHP language
 - Using MVC model
+- Javascript
 
 # 3. Setup assets folder
 
@@ -18,10 +19,10 @@ This Project is using webpack in order to compile Javascript modules and compile
 
 Run:
 
-```
-$ cd public/frontend/assets
-$ npm install
-$ npm run build
+```shell
+cd public/frontend/assets
+npm install
+npm run build
 ```
 
 # 4. Download Database
@@ -30,7 +31,7 @@ This is the path to the database file for you to download: [`/database/***.sql`]
 
 Create a new database on **PHPMyAdmin** at your server (or any other database connection tool), then import the .sql file that you just downloaded.
 
-# 5 Edit Connect Database
+# 5. Edit Connect Database
 
 You need to change the connection information to the database after you have cloned my repository so that the website can work.
 
