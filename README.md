@@ -42,9 +42,16 @@ This is the path to the database file for you to download: [`/database/***.sql`]
 ```php
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'root');
 define('DB_NAME', 'chatapp-php');
 ```
+
+And then run to import database
+
+```shell
+ mysql -u root -p chatapp-php < YOUR-PATH/PHP_Realtime_Chat_App/database/chatapp-php.sql 
+```
+Please change **YOUR-PATH** to your project's path.
 
 <p align="center">
      <img src="https://img.shields.io/packagist/l/doctrine/orm.svg" data-origin="https://img.shields.io/packagist/l/doctrine/orm.svg" alt="license">
